@@ -142,31 +142,25 @@ function getBasicInfo() {
 let class_list = [".edu_course", ".edu_board", ".edu_passing_year", ".edu_per"];
 
 function getEducationInfo() {
-    var data = [];
+    var data = [
+        {
+            "id":1,
+            "course_name":"SSC",
+            "board":"Gujarat",
+            "percentage":85,
+            "year":2023
+        }
+    ];
+
     var edu_length = document.querySelectorAll(".edu_component");
-    // var counter=edu_length*2;
-    // var course = document.querySelectorAll(".edu_course");
-    // course.forEach((data) => {
-    //     console.log(data.value);
-    // })
-    // var board = document.querySelectorAll(".edu_board");
-    // board.forEach((data) => {
-    //     console.log(data.value);
-    // })
-    // var year = document.querySelectorAll(".edu_passing_yeart");
-    // year.forEach((data) => {
-    //     console.log(data.value);
-    // })
-    // var grade = document.querySelectorAll(".edu_per");
-    // grade.forEach((data) => {
-    //     console.log(data.value);
-    // })
-    
+    // var counter=edu_length.lengthl*2;
+    let json={};
     class_list.forEach((data,index)=>{
+        let value=[];
         var course = document.querySelectorAll(data);
-        course.forEach((value)=>{
-            data[index]=value.value;
-        });
+        course.forEach((data,index)=>{
+            value[index]=data.value;
+        })
+        json[index]=value;
     });
-    console.log(data);
 }
