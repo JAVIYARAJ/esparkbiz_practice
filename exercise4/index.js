@@ -1,8 +1,10 @@
+var edu_counter = 0;
 addEducationCard();
 addEdxperienceCard();
 addRefrenceCard();
 
 function addEducationCard() {
+    edu_counter++;
     var edu_card = document.getElementById("edu_info");
     var create_div = document.createElement("div");
     create_div.classList.add("edu_component");
@@ -10,20 +12,20 @@ function addEducationCard() {
     <div>
         <div class="dbl_input">
             <div class="col">
-            <label for="edu_board">Name of Course</label>
-            <input type="text" name="edu_course" class="edu_course">
+            <label for="edu_board${edu_counter}">Name of Course</label>
+            <input type="text" name="edu_course${edu_counter}" id="edu_course${edu_counter}">
             </div>
             <div class="col">
-                <label for="edu_board">Name of Board</label>
-                <input type="text" name="edu_board" class="edu_board">
+                <label for="edu_board${edu_counter}">Name of Board</label>
+                <input type="text" name="edu_board${edu_counter}" id="edu_board${edu_counter}">
             </div>
             <div class="col">
-                <label for="edu_passing_year">Passing year</label>
-                <input type="text" name="edu_passing_year" class="edu_passing_year">
+                <label for="edu_passing_year${edu_counter}">Passing year</label>
+                <input type="text" name="edu_passing_year${edu_counter}" id="edu_passing_year${edu_counter}">
             </div>
             <div class="col">
-                <label for="edu_per">Percentage</label>
-                <input type="text" name="edu_per" class="edu_per">
+                <label for="edu_per${edu_counter}">Percentage</label>
+                <input type="text" name="edu_per${edu_counter}" id="edu_per${edu_counter}">
             </div>
         </div></div>`;
 
@@ -136,31 +138,21 @@ function getBasicInfo() {
     id_list.forEach((id, index) => {
         candidate_data[index] = document.getElementById(id).value;
     });
-    console.log(candidate_data);
+    // console.log(candidate_data);
 }
 
-let class_list = [".edu_course", ".edu_board", ".edu_passing_year", ".edu_per"];
-
+let class_list = ["edu_course", "edu_board", "edu_passing_year", "edu_per"];
+let data = [];
 function getEducationInfo() {
-    var data = [
-        {
-            "id":1,
-            "course_name":"SSC",
-            "board":"Gujarat",
-            "percentage":85,
-            "year":2023
-        }
-    ];
-
-    var edu_length = document.querySelectorAll(".edu_component");
-    // var counter=edu_length.lengthl*2;
-    let json={};
-    class_list.forEach((data,index)=>{
-        let value=[];
-        var course = document.querySelectorAll(data);
-        course.forEach((data,index)=>{
-            value[index]=data.value;
-        })
-        json[index]=value;
-    });
+    let main={};
+    for (let i = 1; i <= edu_counter; i++) {
+        let data_list=[];
+        class_list.forEach((value, index) => {
+            var data = document.getElementById(`${value}${i}`);
+            data_list[index]=data.value;
+        });
+        main[i]=data_list;
+    }
+    console.log(main);
 }
+
