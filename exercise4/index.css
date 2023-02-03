@@ -1,0 +1,50 @@
+fieldset{
+    border-radius: 10px;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.dbl_input{
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 20px;
+}
+#container{
+    height: 400px;
+    width: 100%;
+}
+#addEduBtn{
+    font-size: 30px;
+    font-weight: 900;
+    color: black;
+}
+#state{
+    height: 30px;
+}
+.col{
+    margin: 10px;
+}
+
+#col-2{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+#lang_cols{
+    margin: 10px;
+}
+
+
+#submtBtn
+{
+    background-color: cadetblue;
+    border-radius: 10px;
+    height: 30px;
+    width: 100px;
+    margin: 10px;
+}
+
+.heading{
+    text-align: center;
+}
