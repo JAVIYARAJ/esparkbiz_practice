@@ -1,4 +1,5 @@
 var edu_counter = 0;
+var exe_counter = 0;
 addEducationCard();
 addEdxperienceCard();
 addRefrenceCard();
@@ -34,25 +35,26 @@ function addEducationCard() {
 }
 
 function addEdxperienceCard() {
+    exe_counter++;
     var edu_card = document.getElementById("exe_info");
     var create_div = document.createElement("div");
     var content = `
     <div class="dbl_input">
     <div class="col">
-        <label for="exe_company_name">Company Name</label>
-        <input type="text" name="exe_company_name" id="exe_company_name">
+        <label for="exe_company_name${exe_counter}">Company Name</label>
+        <input type="text" name="exe_company_name${exe_counter}" id="exe_company_name${exe_counter}">
     </div>
     <div class="col">
-        <label for="exe_designation">Designation</label>
-        <input type="text" name="exe_designation" id="exe_designation">
+        <label for="exe_designation${exe_counter}">Designation</label>
+        <input type="text" name="exe_designation${exe_counter}" id="exe_designation${exe_counter}">
     </div>
     <div class="col">
-        <label for="exe_designation">From</label>
-        <input type="date" name="exe_designation" id="exe_designation">
+        <label for="exe_from${exe_counter}">From</label>
+        <input type="date" name="exe_from${exe_counter}" id="exe_from${exe_counter}">
     </div>
     <div class="col">
-        <label for="exe_designation">To</label>
-        <input type="date" name="exe_designation" id="exe_designation">
+        <label for="exe_to${exe_counter}">To</label>
+        <input type="date" name="exe_to${exe_counter}" id="exe_to${exe_counter}">
     </div>
 </div>
 `;
@@ -141,13 +143,27 @@ function getBasicInfo() {
     // console.log(candidate_data);
 }
 
-let class_list = ["edu_course", "edu_board", "edu_passing_year", "edu_per"];
+let class_list1 = ["edu_course", "edu_board", "edu_passing_year", "edu_per"];
 let data = [];
 function getEducationInfo() {
     let main={};
     for (let i = 1; i <= edu_counter; i++) {
         let data_list=[];
-        class_list.forEach((value, index) => {
+        class_list1.forEach((value, index) => {
+            var data = document.getElementById(`${value}${i}`);
+            data_list[index]=data.value;
+        });
+        main[i]=data_list;
+    }
+    console.log(main);
+}
+let class_list2 = ["exe_company_name", "exe_designation", "exe_from", "exe_to"];
+
+function getExperienceInfo() {
+    let main={};
+    for (let i = 1; i <= exe_counter; i++) {
+        let data_list=[];
+        class_list2.forEach((value, index) => {
             var data = document.getElementById(`${value}${i}`);
             data_list[index]=data.value;
         });
