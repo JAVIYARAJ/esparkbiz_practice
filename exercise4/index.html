@@ -13,7 +13,7 @@
     <div id="container">
         <h3 class="heading">Job Application Form</h3>
         <form action="index.html" method="get">
-           
+
             <!-- basic infomation -->
             <fieldset id="basic_info">
                 <legend>Basic details</legend>
@@ -134,19 +134,19 @@
                             <input type="button" value="Add Language">
                         </div>
                         <div id="lang_cols">
-                            <input type="checkbox" name="lang_name" id="lang_hindi" value="hindi">
+                            <input type="checkbox" class="lang_Hindi1" name="lang_name" id="lang_Hindi1" value="hindi">
                             <label for="lang_hindi">Hindi</label>
-                            <input type="checkbox" name="lang_read" id="lang_read" value="read">
+                            <input type="checkbox" name="lang_read1" class="lang1" id="lang_read1" value="read">
                             <label for="lang_read">Read</label>
-                            <input type="checkbox" name="lang_speak" id="lang_speak" value="speak">
+                            <input type="checkbox" name="lang_speak1" class="lang1" id="lang_speak1" value="speak">
                             <label for="lang_speak">Speak</label>
-                            <input type="checkbox" name="lang_write" id="lang_write" value="write">
+                            <input type="checkbox" name="lang_write1" class="lang1" id="lang_write1" value="write">
                             <label for="lang_write">Write</label>
                         </div>
 
                     </div>
-                
-                <!-- Technology infomation -->
+
+                    <!-- Technology infomation -->
                 </fieldset id="tech">
                 <fieldset>
                     <legend>Technology you know</legend>
@@ -155,14 +155,14 @@
                             <input type="button" value="Add Technology">
                         </div>
                         <div id="lang_cols">
-                            <input type="checkbox" name="tech_name" id="tech_name" value="hindi">
-                            <label for="tech_name">Java</label>
-                            <input type="radio" name="tech_java" id="tech_beginner" value="read">
-                            <label for="tech_beginner">Beginner</label>
-                            <input type="radio" name="tech_java" id="tech_beginner" value="tech_beginner">
-                            <label for="tech_beginner">Mideator</label>
-                            <input type="radio" name="tech_java" id="tech_expert" value="expert">
-                            <label for="tech_expert">Expert</label>
+                            <input type="checkbox" name="tech_Java1" value="Java">
+                            <label for="tech_Java1">Java</label>
+                            <input type="radio" name="tech_Java1" class="tech_beginner1" value="beginner">
+                            <label for="tech_Java1">Beginner</label>
+                            <input type="radio" name="tech_Java1" class="tech_mideator1" value="mideator">
+                            <label for="tech_Java1">Mideator</label>
+                            <input type="radio" name="tech_Java1" class="tech_expert1" value="expert">
+                            <label for="tech_Java1">Expert</label>
                         </div>
 
                     </div>
@@ -212,25 +212,25 @@
                             <label for="current_ctc">Current CTC</label>
                             <input type="text" name="current_ctc" id="current_ctc">
                         </div>
-                       
+
                     </div>
-                   <div>
+                    <div>
 
-                    <!-- department infomation -->
+                        <!-- department infomation -->
 
-                    <label for="department">Department</label>
-                    <select name="department" id="department">
-                        <option value="design">Design</option>
-                        <option value="marketing">Marketing</option>
-                        <option value="frontend">Frontend</option>
-                        <option value="database designer">Database Designer</option>
-                        <option value="other">Other</option>
-                        
-                    </select>
-                   </div>
+                        <label for="department">Department</label>
+                        <select name="department" id="department">
+                            <option value="design">Design</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="frontend">Frontend</option>
+                            <option value="database designer">Database Designer</option>
+                            <option value="other">Other</option>
+
+                        </select>
+                    </div>
                 </div>
             </fieldset>
-            <input type="button" id="submtBtn" value="submit" onclick="getExperienceInfo()">            
+            <input type="button" id="submtBtn" value="submit" onclick="getTechnologyData()">
         </form>
     </div>
 </body>
