@@ -1,13 +1,35 @@
+//counter declaration for set dynamic ids in html element
 var edu_counter = 0;
 var exe_counter = 0;
 var ref_counter = 0;
+
+//this counter 1 because at least one time show
 var lang_counter = 1;
 var tech_counter = 1;
+
 var language_list = ["Hindi"];
-var technology_list=["Java"];
+var technology_list = ["Java"];
+
+//use for display this content at least one time
 addEducationCard();
 addEdxperienceCard();
 addRefrenceCard();
+
+//form whole data variable declaration
+var candidateData = [];
+
+let id_list = [
+    "fname", "lname", "designation", "address1", "address2", "email", "phone", "city", "gender", "state", "relationship", "dob"
+];
+
+function getBasicInfo() {
+    var basic_info = [];
+
+    id_list.forEach((id, index) => {
+        basic_info[id] = document.getElementById(id).value;
+    });
+    candidateData["basic_info"] = basic_info;
+}
 
 function addEducationCard() {
     edu_counter++;
@@ -39,6 +61,22 @@ function addEducationCard() {
     edu_card.appendChild(create_div);
 }
 
+
+function getEducationInfo() {
+
+    let edu_class_list = ["edu_course", "edu_board", "edu_passing_year", "edu_per"];
+    let edu_info = {};
+    for (let i = 1; i <= edu_counter; i++) {
+        let data_list = [];
+        edu_class_list.forEach((value, index) => {
+            var data = document.getElementById(`${value}${i}`);
+            data_list[index] = data.value;
+        });
+        edu_info[`edu_${i}`] = data_list;
+    }
+    candidateData["edu_info"] = edu_info;
+}
+
 function addEdxperienceCard() {
     exe_counter++;
     var edu_card = document.getElementById("exe_info");
@@ -68,6 +106,23 @@ function addEdxperienceCard() {
     edu_card.appendChild(create_div);
 }
 
+
+function getExperienceInfo() {
+
+    let exe_class_list = ["exe_company_name", "exe_designation", "exe_from", "exe_to"];
+    let exe_info = {};
+    for (let i = 1; i <= exe_counter; i++) {
+        let data_list = [];
+        exe_class_list.forEach((value, index) => {
+            var data = document.getElementById(`${value}${i}`);
+            data_list[index] = data.value;
+        });
+        exe_info[`exe_${i}`] = data_list;
+    }
+    candidateData["exe_info"] = exe_info;
+}
+
+
 function addLangaugeCard() {
     let lang_name = prompt("Enter Language Name");
     if (lang_name === null) return;
@@ -94,22 +149,22 @@ function addLangaugeCard() {
 
 
 function getLanguageData() {
-    let data = [];    
-    
-    let checkbox_values=[];
-    for (let i = 0; i <language_list.length; i++) {
-        var doc = document.getElementsByClassName(`lang${i+1}`);
-        checkbox_values[i]=doc;
+    let lang_info = [];
+
+    let checkbox_values = [];
+    for (let i = 0; i < language_list.length; i++) {
+        var doc = document.getElementsByClassName(`lang${i + 1}`);
+        checkbox_values[i] = doc;
     }
-    let content=[];
-    for(let i=0;i<checkbox_values.length;i++){
-        let data=[];
-        for(let j=0;j<checkbox_values[i].length;j++){
-            data[j]=checkbox_values[i][j].checked;
+
+    for (let i = 0; i < checkbox_values.length; i++) {
+        let data = [];
+        for (let j = 0; j < checkbox_values[i].length; j++) {
+            data[j] = checkbox_values[i][j].checked;
         }
-        content[language_list[i]]=data;
+        lang_info[`${language_list[i]}`] = data;
     }
-    console.log(content);
+    candidateData["language_info"] = lang_info;
 }
 
 
@@ -122,13 +177,16 @@ function addTechnologyCard() {
     var create_div = document.createElement("div");
     var content = `
     <div id="lang_cols">
-        <input type="checkbox" name="tech_${tech_name}${tech_counter}" value="${tech_name}">
-        <label for="tech_${tech_name}${tech_counter}">${tech_name}</label>
-        <input type="radio" name="tech_${tech_name}${tech_counter}"  value="beginner">
+        <input type="checkbox" id="tech_main_${tech_name}${tech_counter}" name="tech_main_${tech_name}${tech_counter}" value="${tech_name}">
+        <label for="tech_main_${tech_name}${tech_counter}">${tech_name}</label>
+
+        <input type="radio" name="tech_${tech_name}${tech_counter}"  value="beginner" id="tech_${tech_name}_beginner${tech_counter}">
         <label for="tech_${tech_name}${tech_counter}">Beginner</label>
-        <input type="radio" name="tech_${tech_name}${tech_counter}"  value="mideator">
+
+        <input type="radio" name="tech_${tech_name}${tech_counter}"  value="mideator" id="tech_${tech_name}_mideator${tech_counter}">
         <label for="tech_${tech_name}${tech_counter}">Mideator</label>
-        <input type="radio" name="tech_${tech_name}${tech_counter}"  value="expert">
+
+        <input type="radio" name="tech_${tech_name}${tech_counter}"  value="expert" id="tech_${tech_name}_expert${tech_counter}">
         <label for="tech_${tech_name}${tech_counter}">Expert</label>
     </div>
     `;
@@ -136,10 +194,19 @@ function addTechnologyCard() {
     tech_card.appendChild(create_div);
 }
 
-function getTechnologyData(){
-    technology_list.forEach((tech,index)=>{
-        
-    });
+function getTechnologyData() {
+    let tech_type_list = ["beginner", "mideator", "expert"];
+    var tech_data = [];
+    for (let i = 0; i < technology_list.length; i++) {
+        for (let j = 0; j < tech_type_list.length; j++) {
+            var doc = document.getElementById(`tech_${technology_list[i]}_${tech_type_list[j]}${i + 1}`);
+            if (doc.checked) {
+                tech_data[technology_list[i]] = doc.value;
+            }
+        }
+    }
+    candidateData["technology_info"] = tech_data;
+
 }
 
 function addRefrenceCard() {
@@ -168,64 +235,21 @@ function addRefrenceCard() {
     ref_card.appendChild(create_div);
 }
 
-
-let id_list = [
-    "fname", "lname", "designation", "address1", "address2", "email", "phone", "city", "gender", "state", "relationship", "dob"
-];
-
-function getBasicInfo() {
-    var candidate_data = [];
-
-    id_list.forEach((id, index) => {
-        candidate_data[index] = document.getElementById(id).value;
-    });
-    // console.log(candidate_data);
-}
-
-let class_list1 = ["edu_course", "edu_board", "edu_passing_year", "edu_per"];
-let data = [];
-function getEducationInfo() {
-    let main = {};
-    for (let i = 1; i <= edu_counter; i++) {
-        let data_list = [];
-        class_list1.forEach((value, index) => {
-            var data = document.getElementById(`${value}${i}`);
-            data_list[index] = data.value;
-        });
-        main[i] = data_list;
-    }
-    console.log(main);
-}
-let class_list2 = ["exe_company_name", "exe_designation", "exe_from", "exe_to"];
-
-function getExperienceInfo() {
-    let main = {};
-    for (let i = 1; i <= exe_counter; i++) {
-        let data_list = [];
-        class_list2.forEach((value, index) => {
-            var data = document.getElementById(`${value}${i}`);
-            data_list[index] = data.value;
-        });
-        main[i - 1] = data_list;
-    }
-    console.log(main);
-}
-
-let ref_id_list = [
-    "ref_name", "ref_relation", "ref_number"
-];
-
 function getRefrenceInfo() {
-    let main = {};
+
+    let ref_id_list = [
+        "ref_name", "ref_relation", "ref_number"
+    ];
+    let ref_info = {};
     for (let i = 1; i <= ref_counter; i++) {
         let data_list = [];
         ref_id_list.forEach((value, index) => {
             var data = document.getElementById(`${value}${i}`);
             data_list[index] = data.value;
         });
-        main[i - 1] = data_list;
+        ref_info[`ref_${i}`] = data_list;
     }
-    console.log(main);
+    candidateData['ref_info'] = ref_info;
 }
 
 
@@ -233,32 +257,23 @@ function getPrefrenceData() {
     let prefre_id_list = [
         "pref_location", "notice_period", "expacted_ctc", "current_ctc", "department"
     ];
-
+    let pref_info=[];
     prefre_id_list.forEach((id, index) => {
         var data = document.getElementById(id);
-        console.log(data.value);
+        pref_info[id]=data.value;
     });
+    candidateData['pref_info']=pref_info;
+    console.log(candidateData);
 }
 
 
-//garbage code 
-
-// let checkbox_values=[];
-    // language_list.forEach((lang,index)=>{
-    //     var doc2 = document.getElementsByClassName(`lang${index+1}`);
-    //     checkbox_values[index]=doc2;
-    // });
-
-    // for(let i=0;i<checkbox_values.length;i++){
-    //     for(let j=0;j<3;j++){
-    //         data[language_list[i]]={
-    //             "read":checkbox_values[i][j].checked,
-    //             "speak":checkbox_values[i][j].checked,
-    //             "write":checkbox_values[i][j].checked,
-    //         };
-    //         console.log(data);
-    //     }
-    //     // console.log(data);
-
-    // }
-    // console.log(data);
+function displayData() {
+    getBasicInfo();
+    getEducationInfo();
+    getExperienceInfo();
+    getLanguageData();
+    getTechnologyData();
+    getPrefrenceData();
+    getRefrenceInfo();
+    console.log(candidateData);
+}

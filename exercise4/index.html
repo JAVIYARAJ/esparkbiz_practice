@@ -60,7 +60,7 @@
                 <div class="dbl_input">
                     <div id="gender-div">
                         <label for="gender">Gender</label>
-                        <input type="radio" name="gender" id="gender">Male
+                        <input type="radio" name="gender" value="male" id="gender">Male
                         <input type="radio" name="gender" id="gender">Female
                         <input type="radio" name="gender" id="gender">Other
                     </div>
@@ -155,13 +155,16 @@
                             <input type="button" value="Add Technology">
                         </div>
                         <div id="lang_cols">
-                            <input type="checkbox" name="tech_Java1" value="Java">
-                            <label for="tech_Java1">Java</label>
-                            <input type="radio" name="tech_Java1" class="tech_beginner1" value="beginner">
+                            <input type="checkbox" name="tech_main_Java1" value="Java" id="tech_main_Java1">
+                            <label for="tech_main_Java1">Java</label>
+
+                            <input type="radio" name="tech_Java1" id="tech_Java_beginner1" value="beginner">
                             <label for="tech_Java1">Beginner</label>
-                            <input type="radio" name="tech_Java1" class="tech_mideator1" value="mideator">
+
+                            <input type="radio" name="tech_Java1" id="tech_Java_mideator1" value="mideator">
                             <label for="tech_Java1">Mideator</label>
-                            <input type="radio" name="tech_Java1" class="tech_expert1" value="expert">
+
+                            <input type="radio" name="tech_Java1" id="tech_Java_expert1" value="expert">
                             <label for="tech_Java1">Expert</label>
                         </div>
 
@@ -230,7 +233,7 @@
                     </div>
                 </div>
             </fieldset>
-            <input type="button" id="submtBtn" value="submit" onclick="getTechnologyData()">
+            <input type="button" id="submtBtn" value="submit" onclick="displayData()">
         </form>
     </div>
 </body>
