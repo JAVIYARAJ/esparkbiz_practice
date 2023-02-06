@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "scripts": {
+    "start": "nodemon ./basic/server.js",
+    "app": "nodemon ./date/app.js"
+  },
+  "name": "node",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
