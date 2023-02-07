@@ -14,20 +14,20 @@
 </head>
 
 <body>
-    <form action="/update-student-data/<%=data[0].id%>" method="post">
-        <label for="name">Name</label>
-        <input type="text" name="name" value="<%=data[0].name%>">
+    <form action="/update-student-data/<%=id%>" method="post">
+        <label for="name_update">Name</label>
+        <input type="text" name="name_update" value="<%=data[0].name%>">
         <br>
-        <label for="city">City</label>
-        <input type="text" name="city" value="<%=data[0].city%>">
+        <label for="city_update">City</label>
+        <input type="text" name="city_update" value="<%=data[0].city%>">
         <br>
-        <label for="teacher_id">teacher id</label>
-        <input type="text" name="teacher_id" value="<%=data[0].teacher_id%>">
+        <label for="teacher_id_update">teacher id</label>
+        <input type="text" name="teacher_id_update" value="<%=data[0].teacher_id%>">
         <br>
-        <label for="marks">marks</label>
-        <input type="text" name="marks" value="<%=data[0].marks%>">
+        <label for="marks_update">marks</label>
+        <input type="text" name="marks_update" value="<%=data[0].marks%>">
         <br>
-        <input type="submit" value="submit" name="update">
+        <input type="submit" value="submit" name="update_update">
     </form>
 </body>
 
