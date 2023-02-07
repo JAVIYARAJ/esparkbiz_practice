@@ -21,11 +21,13 @@ fs.readFile('./fs/sample.txt','utf-8',(err,data)=>{
 });
 */
 
-/* if want crreate a file then we need w or a mode
-fs.open('./fs/custom.txt','a+',(err,flag)=>{
+//  if want crreate a file then we need w or a mode
+/*
+fs.open('sample.txt','r',(err,flag)=>{
     if(err){
         console.log(err.message);
     }
+    console.log(typeof flag);
 });
 */
 
@@ -59,6 +61,7 @@ fs.rename('./fs/index.html','./fs/main.html',(err)=>{
 /*
 let rs=fs.createReadStream('./fs/sample.txt');
 //so this event fire based on situation
+
 rs.on('open',(err)=>{
     if(err){
         console.log(err.message);

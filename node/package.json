@@ -1,70 +1,59 @@
 {
-<<<<<<< HEAD
-  "dependencies": {
-    "nodemon": "^2.0.20"
-  },
-  "scripts": {
-    "basic": "nodemon ./basic/server.js",
-    "str": "nodemon ./str/app.js",
-    "date": "nodemon ./date/app.js",
-    "fs": "nodemon ./fs/app.js",
-    "os": "nodemon ./os/app.js",
-    "url": "nodemon ./url/app.js"
-  },
   "name": "node",
   "version": "1.0.0",
-  "main": "server.js",
-  "devDependencies": {},
-=======
-  "devDependencies": {
-    "nodemon": "^2.0.20"
-  },
-  "scripts": {
-    "start": "nodemon server.js"
-
-  },
-  "name": "node",
-  "version": "1.0.0",
+  "description": "",
   "main": "client.js",
   "dependencies": {
     "abbrev": "^1.1.1",
     "anymatch": "^3.1.3",
     "balanced-match": "^1.0.2",
+    "bignumber.js": "^9.0.0",
     "binary-extensions": "^2.2.0",
     "brace-expansion": "^1.1.11",
     "braces": "^3.0.2",
     "chokidar": "^3.5.3",
     "concat-map": "^0.0.1",
+    "core-util-is": "^1.0.3",
     "debug": "^3.2.7",
+    "express": "^4.18.2",
     "fill-range": "^7.0.1",
     "glob-parent": "^5.1.2",
     "has-flag": "^3.0.0",
     "ignore-by-default": "^1.0.1",
+    "inherits": "^2.0.4",
     "is-binary-path": "^2.1.0",
     "is-extglob": "^2.1.1",
     "is-glob": "^4.0.3",
     "is-number": "^7.0.0",
+    "isarray": "^1.0.0",
     "minimatch": "^3.1.2",
     "ms": "^2.1.3",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.1.1",
     "nopt": "^1.0.10",
     "normalize-path": "^3.0.0",
     "picomatch": "^2.3.1",
+    "process-nextick-args": "^2.0.1",
     "pstree.remy": "^1.1.8",
+    "readable-stream": "^2.3.7",
     "readdirp": "^3.6.0",
+    "safe-buffer": "^5.1.2",
     "semver": "^5.7.1",
     "simple-update-notifier": "^1.1.0",
+    "sqlstring": "^2.3.1",
+    "string_decoder": "^1.1.1",
     "supports-color": "^5.5.0",
     "to-regex-range": "^5.0.1",
     "touch": "^3.1.0",
-    "undefsafe": "^2.0.5"
+    "undefsafe": "^2.0.5",
+    "util-deprecate": "^1.0.2"
   },
->>>>>>> 3edd4fe20bd3ff2776aac980d10c3eca05595d4e
-  "keywords": [],
-  "author": "",
+  "scripts": {
+    "mysql": "nodemon ./mysql/app.js"
+  },
+  "author": "raj",
   "license": "ISC",
-  "description": ""
-<<<<<<< HEAD
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
 }
-=======
-}
->>>>>>> 3edd4fe20bd3ff2776aac980d10c3eca05595d4e
