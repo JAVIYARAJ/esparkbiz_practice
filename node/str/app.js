@@ -1,6 +1,8 @@
 const fs=require('fs');
+const { get } = require('http');
 
 //task- read file and convert first letter of word in uppercase
+/*
 fs.readFile('./str/sample.txt','utf-8',(err,data)=>{
     let content=data.split(" ");
     content.forEach((data)=>{
@@ -9,3 +11,4 @@ fs.readFile('./str/sample.txt','utf-8',(err,data)=>{
         console.log(word);
     });
 })
+*/

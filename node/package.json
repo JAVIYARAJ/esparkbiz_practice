@@ -3,8 +3,12 @@
     "nodemon": "^2.0.20"
   },
   "scripts": {
-    "start": "nodemon ./basic/server.js",
-    "app": "nodemon ./date/app.js"
+    "basic": "nodemon ./basic/server.js",
+    "str": "nodemon ./str/app.js",
+    "date": "nodemon ./date/app.js",
+    "fs": "nodemon ./fs/app.js",
+    "os": "nodemon ./os/app.js",
+    "url": "nodemon ./url/app.js"
   },
   "name": "node",
   "version": "1.0.0",

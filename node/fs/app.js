@@ -1,7 +1,7 @@
 const fs = require("fs");
 const event=require("events");
 
-let content='Esparkbiz';
+// let content='Esparkbiz';
 
 /*
 fs.appendFile('./fs/sample.txt',content,(err)=>{
@@ -21,7 +21,7 @@ fs.readFile('./fs/sample.txt','utf-8',(err,data)=>{
 });
 */
 
-/*
+/* if want crreate a file then we need w or a mode
 fs.open('./fs/custom.txt','a+',(err,flag)=>{
     if(err){
         console.log(err.message);
