@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
     let page = req.query.page || 1;
     let limit = 10;
     let value = (page - 1) * limit;
-    let ids = ["id", "First_Name", "Last_Name", "Contact_No", "City", "Email", "University_id", "createdAt",];
+    let ids = ["id", "First_Name", "Last_Name", "Contact_No", "City", "Email", "University_id", "createdAt"];
     conn.query(`select * from student_express limit ${value},${limit}`, (err, result, filed) => {
         if (page == 1) {
             prev = 0;
@@ -35,11 +35,12 @@ app.get('/', (req, res) => {
         else {
             prev=parseInt(page)-1;
         }
-        if (page == 150) {
+        if (page == 150 || page==0) {
             page = 1;
         } else {
             page++;
         }
+        
         res.render("page", { data: result, id: ids, page: page, prev: prev });
     });
 
