@@ -1,4 +1,3 @@
-const e = require('express');
 const express=require('express');
 const con=require('./db/dbconnect');
 const bodyParser = require("body-parser")
@@ -35,6 +34,7 @@ app.post('/insert',(req,res)=>{
     }
 });
 
+//use for get all data and display on web
 app.get('/getdata',(req,res)=>{
     if(res.statusCode==200){
         con.query("SELECT * FROM student",(err,value,field)=>{
@@ -43,19 +43,20 @@ app.get('/getdata',(req,res)=>{
     }
 });
 
-//this get request use for 
+//this get request use for select one record and then display on update form
 app.get('/update-student/:id',(req,res)=>{
     let id=req.params.id;
     if(res.statusCode==200){
         con.query(`SELECT * FROM student where id=${id}`,(err,result,field)=>{
             console.log(result);
-            res.render("update",{data:result,id:id});
+            res.render("update",{data:result});
         });
     }else{
         res.send("Update error occur");
     }
 });
 
+//this post request for update record
 app.post('/update-student-data/:id',(req,res)=>{
     console.log(res);
     if(res.statusCode==200){
@@ -65,11 +66,12 @@ app.post('/update-student-data/:id',(req,res)=>{
         
         con.query(`UPDATE student set name='${name_update}',city='${city_update}',teacher_id=${teacher_id_update},marks=${marks_update} where id=${req.params.id}`,(err, ans)=>{
            if(err) return console.log(err.message);
-           return res.send("Data Updated")
+           return res.send("Data Updated");
         });
     }
 });
 
+//this get request for delete a one record.
 app.get('/delete-data/:id',(req,res)=>{
     
         console.log(req.params.id);
