@@ -9,6 +9,7 @@ app.use(bodyParser.urlencoded({extended: false}))
 
 app.set('view engine','ejs');
 
+//get request for display form 
 app.get('/form',(req,res)=>{
     if(res.statusCode==200){
         res.render('../views/form.ejs');
@@ -36,13 +37,13 @@ app.post('/insert',(req,res)=>{
 
 app.get('/getdata',(req,res)=>{
     if(res.statusCode==200){
-        let result;
         con.query("SELECT * FROM student",(err,value,field)=>{
             res.render("result",{data:value});
         });
     }
 });
 
+//this get request use for 
 app.get('/update-student/:id',(req,res)=>{
     let id=req.params.id;
     if(res.statusCode==200){
@@ -50,23 +51,36 @@ app.get('/update-student/:id',(req,res)=>{
             console.log(result);
             res.render("update",{data:result,id:id});
         });
+    }else{
+        res.send("Update error occur");
     }
 });
 
 app.post('/update-student-data/:id',(req,res)=>{
-    
+    console.log(res);
     if(res.statusCode==200){
         const{
-            id,name_update,city_update,teacher_id_update,marks_update
+            name_update,city_update,teacher_id_update,marks_update
         }=req.body
         
-        con.query(`UPDATE student set name='${name_update}',city='${city_update}',teacher_id=${teacher_id_update},marks=${marks_update} where id=${id}'`,(req,res)=>{
-            if(res.statusCode==200){
-                console.log(`${id} id data updated`);
-                res.render("Data updated");
-            }
+        con.query(`UPDATE student set name='${name_update}',city='${city_update}',teacher_id=${teacher_id_update},marks=${marks_update} where id=${req.params.id}`,(err, ans)=>{
+           if(err) return console.log(err.message);
+           return res.send("Data Updated")
         });
     }
+});
+
+app.get('/delete-data/:id',(req,res)=>{
+    
+        console.log(req.params.id);
+        con.query(`delete from student where id=${req.params.id}`,(err,result)=>{
+            if(err){
+                return console.log(err.message);
+            }else{
+                return res.send("Data Deleted Successfully");
+            }
+        });
+    
 });
 
 app.listen(3000,()=>{

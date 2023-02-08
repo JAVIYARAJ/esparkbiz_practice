@@ -15,6 +15,7 @@
 
 <body>
     <form action="/update-student-data/<%=id%>" method="post">
+        <input type="text" value="<%=id%>" hidden>
         <label for="name_update">Name</label>
         <input type="text" name="name_update" value="<%=data[0].name%>">
         <br>
