@@ -4,7 +4,7 @@ const bp = require('body-parser');
 const conn = require("./db/dbconnect.js");
 const con = require('./db/dbconnect.js');
 const app = express();
-let total_records=0;
+let total_records = 0;
 app.set('view engine', 'ejs');
 
 
@@ -25,18 +25,33 @@ app.get('/page/:page', (req, res) => {
 
 //this get request use for paagination
 app.get('/', (req, res) => {
-    let total_records=0;
-    conn.query('select count(*) as count from student_express',(err,res,field)=>{
-        total_records=res[0]["count"];
-    });
+    let total_records = 0;
+    let ids = ["id", "First_Name", "Last_Name", "Contact_No", "City", "Email", "University_id", "createdAt"];
+    let query = '%' + req.query.id + '%';
     let page = req.query.page ?? 1;
+
+    conn.query('select count(*) as count from student_express', (err, res, field) => {
+        total_records = res[0]["count"];
+    });
+
+    conn.query(`SELECT * FROM practice.student_express where student_express.First_Name like '${query}'`, (err, result, filed) => {
+        if (err) {
+            return console.log(err.message);
+        } else {
+            //return res.render("page", {data: result, id: ids, page: 1, prev: 0, total_pages: total_records });
+        }
+    });
+
+
+    
+
     let limit = 10;
     let value = (page - 1) * limit;
-    let ids = ["id", "First_Name", "Last_Name", "Contact_No", "City", "Email", "University_id", "createdAt"];
+    
     conn.query(`select * from student_express limit ${value},${limit}`, (err, result, filed) => {
 
         //this code is use for display a some pages card-view for navigate directly in that page.
-        
+
         //this code is use for perform next and prevous functionality
         if (page == 1) {
             prev = 0;
@@ -44,14 +59,15 @@ app.get('/', (req, res) => {
         else {
             prev = parseInt(page) - 1;
         }
-        if (page == parseInt(total_records/limit) || page == 0) {
+        if (page == parseInt(total_records / limit) || page == 0) {
             page = 1;
         } else {
             page++;
         }
 
-        res.render("page", { data: result, id: ids, page: page, prev: prev,total_pages:total_records});
+        res.render("page", { data: result, id: ids, page: page, prev: prev, total_pages: total_records });
     });
+
 
 });
 
@@ -78,17 +94,19 @@ app.get('/insert-list', (req, res) => {
 
 });
 
-//this get request use for serach record based on user query
-// app.get('/search-item/:query',(req,res)=>{
-//     let query='%'+res.body.query+'%';
-//     conn.query(`SELECT * FROM practice.student_express where student_express.First_Name like '${query}'`,(err,result,filed)=>{
-//         if(err){
-//             return console.log(err.message);
-//         }else{
-//             return console.log(result);
-//         }
-//     })
-// });
+// this get request use for serach record based on user query
+app.get('/search', (req, res) => {
+    let query = '%' + req.query.id + '%';
+    conn.query(`SELECT * FROM practice.student_express where student_express.First_Name like '${query}'`, (err, result, filed) => {
+        if (err) {
+            return console.log(err.message);
+        } else {
+            return console.log(result);
+        }
+    })
+    // console.log(query);
+
+});
 
 app.listen(3000, () => {
     console.log('server is running on 3000');

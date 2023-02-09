@@ -65,17 +65,17 @@
         <br>
 
         <div class="container changeBtn">
-            <a class="btn btn-primary mr-5" href="/?page=<%= page %>" role="button">Next &nbsp;&nbsp;<%=page%></a>
-            <a class="btn btn-primary" href="/?page=<%= prev %>" role="button">Prev&nbsp;&nbsp; <%= prev%></a>
-            <a class="btn btn-primary disabled" href="#" role="button">Total Pages&nbsp;&nbsp; <%= total_pages%></a>
+            <a class="btn btn-primary m-1" href="/?page=<%= page %>" role="button">Next &nbsp;&nbsp;<%=page%></a>
+            <a class="btn btn-primary m-1" href="/?page=<%= prev %>" role="button">Prev&nbsp;&nbsp; <%= prev%></a>
+            <a class="btn btn-primary disabled m-1" href="#" role="button">Total Pages&nbsp;&nbsp; <%= total_pages%></a>
         </div>
         
         <br>
         <br>
         <br>
         <div class="container changeBtn">
-
-            <%for(let i= (page>5 ? (page-5) : 1) ;i< (page>5 ? (page+5) : 10);i++){ %>
+            
+            <%for(let i= (page>5 ? (page-5) : 1) ;i< (page>5 && page< total_pages ? (page+5) : 10);i++){ %>
                 <a class="btn btn-primary m-1" href="/?page=<%= i %>" role="button">Page-<%=i%></a>
             <%}%>
         </div>
