@@ -3,16 +3,19 @@ const ejs = require('ejs');
 const bp = require('body-parser');
 const conn = require("./db/dbconnect.js");
 const con = require('./db/dbconnect.js');
+const bodyParser = require('body-parser');
+const e = require('express');
 const app = express();
-let total_records = 0;
 app.set('view engine', 'ejs');
-
+app.use(bodyParser.urlencoded({extended:false}));
 
 const first_name = ["Aarav", "Aryan", "Aditi", "Aishwarya", "Amit", "Amrita", "Ananya", "Anika", "Anjali", "Arjun", "Arnav", "Aryan", "Ashok", "Bharat", "Bindiya", "Chaitanya", "Chandni", "Chetan", "Darshan", "Devanshi", "Dhruv", "Diya", "Ganesh", "Garima", "Gaurav", "Gayatri", "Gitanjali", "Hari", "Hema", "Isha", "Ishan", "Jasmine", "Jayant", "Jhanvi", "Jigar", "Karan", "Kavita", "Khushi", "Kiran", "Lakshmi", "Madhuri", "Mahi", "Manav", "Meera", "Megha", "Mohit", "Mukesh", "Naveen", "Neha", "Nidhi", "Pallavi", "Parineeti", "Parth", "Pooja", "Pradeep", "Prakash", "Priya", "Rajesh", "Rajni", "Rakesh", "Raman", "Ravi", "Rekha", "Rhea", "Rohit", "Roshni", "Rupal", "Sachin", "Sakshi", "Samar", "Sarika", "Shivani", "Shivansh", "Shruti", "Shweta", "Simran", "Sohan", "Sourav", "Sridhar", "Srinivas", "Sudhir", "Sukanta", "Supriya", "Suresh", "Swathi", "Tanuja", "Tanya", "Tarun", "Tripti", "Uma", "Urvashi", "Vasudev", "Vidya", "Vikrant", "Vinay", "Vineet", "Vishal", "Vivek", "Yogesh", "Zoya"];
 
 const last_name = ["Agarwal", "Ahuja", "Arora", "Bhalla", "Bhatia", "Chauhan", "Chopra", "Das", "Datta", "Dawar", "Dhar", "Gandhi", "Gaur", "Gupta", "Jain", "Jha", "Kapoor", "Kashyap", "Kaur", "Khanna", "Kohli", "Lal", "Mehta", "Mishra", "Mitra", "Nagpal", "Nair", "Narang", "Nayyar", "Pandey", "Pant", "Parikh", "Patel", "Patil", "Rao", "Reddy", "Saha", "Sen", "Sharma", "Shukla", "Singh", "Sinha", "Tiwari", "Trivedi", "Verma", "Vohra", "Wadhwa", "Yadav", "Bose", "Chatterjee", "Dasgupta", "Ganguly", "Ghosh", "Guha", "Banerjee", "Bhattacharya", "Dey", "Dutta", "Mukherjee", "Sarkar", "Chakraborty", "Roy", "Sengupta", "Majumdar", "Bhattacharjee", "Choudhury", "Das", "Saha", "Chakravarty", "Ghoshal", "Roychoudhury", "Bhowmik", "Mukhopadhyay", "Mitra", "Banerjee", "Nag", "Saha", "Pal", "Mondal", "Kundu", "Sarkar", "Bharadwaj", "Bhatt", "Rai", "Nayar", "Menon", "Nambiar", "Nathan", "Menon", "Mohan", "Chand", "Rajan", "Nair", "Pillai", "Soman", "Nambiar", "Sivaraman", "Kurup", "Nair", "Gopinath", "Krishnan", "Vijayan", "Prakash", "Mohanan"];
 
 const cities = ["Ahmedabad", "Bengaluru", "Chennai", "Delhi", "Hyderabad", "Kolkata", "Mumbai", "Pune", "Aurangabad", "Bhopal", "Chandigarh", "Coimbatore", "Faridabad", "Gurgaon", "Guwahati", "Jaipur", "Lucknow", "Nagpur", "Nashik", "Patna", "Surat", "Thane", "Vadodara", "Varanasi", "Visakhapatnam", "Amritsar", "Agra", "Aligarh", "Allahabad", "Bhubaneswar", "Calicut", "Gwalior", "Indore", "Jabalpur", "Jammu", "Kanpur", "Ludhiana", "Madurai", "Meerut", "Moradabad", "Muzaffarnagar", "Noida", "Ranchi", "Solapur", "Udaipur", "Vijayawada", "Bareilly", "Dehradun", "Jodhpur", "Kota", "Rajkot", "Shimla", "Tiruchirappalli", "Vellore", "Warangal", "Ajmer", "Akola", "Bhiwandi", "Bhavnagar", "Bokaro", "Dhanbad", "Gorakhpur", "Jhansi", "Kolhapur", "Rourkela", "Srinagar", "Thiruvananthapuram", "Ujjain"];
+
+let ids = ["id", "First_Name", "Last_Name", "Contact_No", "City", "Email", "University_id", "createdAt"];
 
 //this request use for display all data in web using ejs based on entered page value
 app.get('/page/:page', (req, res) => {
@@ -23,33 +26,26 @@ app.get('/page/:page', (req, res) => {
     });
 });
 
+
+
 //this get request use for paagination
 app.get('/', (req, res) => {
+    
     let total_records = 0;
-    let ids = ["id", "First_Name", "Last_Name", "Contact_No", "City", "Email", "University_id", "createdAt"];
-    let query = '%' + req.query.id + '%';
     let page = req.query.page ?? 1;
-
+    let limit = 10;
+    let value = (page - 1) * limit;
+    let sort=req.query.sort || 'DESC';
+    let sortField=req.query.sortField;
+    console.log(`api call ${sort}`);
+    
+    
     conn.query('select count(*) as count from student_express', (err, res, field) => {
         total_records = res[0]["count"];
     });
-
-    conn.query(`SELECT * FROM practice.student_express where student_express.First_Name like '${query}'`, (err, result, filed) => {
-        if (err) {
-            return console.log(err.message);
-        } else {
-            //return res.render("page", {data: result, id: ids, page: 1, prev: 0, total_pages: total_records });
-        }
-    });
-
-
     
 
-    let limit = 10;
-    let value = (page - 1) * limit;
-    
-    conn.query(`select * from student_express limit ${value},${limit}`, (err, result, filed) => {
-
+    conn.query(`select * from student_express order by ${req.query.orderBy ?? "id"} ${sort} limit ${value},${limit}`, (err, result, filed) => {
         //this code is use for display a some pages card-view for navigate directly in that page.
 
         //this code is use for perform next and prevous functionality
@@ -65,10 +61,15 @@ app.get('/', (req, res) => {
             page++;
         }
 
-        res.render("page", { data: result, id: ids, page: page, prev: prev, total_pages: total_records });
+        if(sort=='ASC' && sortField=='id'){
+            sort='DESC';
+        }else{
+            sort='ASC';
+        }
+        
+        res.render("page", { data: result, id: ids, page: page, prev: prev, total_pages: total_records ,order_value:req.query.orderBy,sort:sort});
+        
     });
-
-
 });
 
 //this request use for insert a list of data in mysql
@@ -95,17 +96,25 @@ app.get('/insert-list', (req, res) => {
 });
 
 // this get request use for serach record based on user query
-app.get('/search', (req, res) => {
-    let query = '%' + req.query.id + '%';
+app.post('/search', (req, res) => {
+    let query = '%' + req.body.fname + '%';
     conn.query(`SELECT * FROM practice.student_express where student_express.First_Name like '${query}'`, (err, result, filed) => {
         if (err) {
             return console.log(err.message);
         } else {
-            return console.log(result);
+            res.render("search",{data: result, id: ids, page: 10, prev: 1, total_pages: 12 });
         }
     })
-    // console.log(query);
+});
 
+
+app.get('/filter',(req,res)=>{
+    conn.query(`select * from student_express order by student_express.${req.query.orderBy}`,(err,result,filed)=>{
+        if(err){
+            return console.log(err.message);
+        }
+        res.render("search",{data:result,id:ids});
+    });
 });
 
 app.listen(3000, () => {

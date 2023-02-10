@@ -9,47 +9,70 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-        <style>
-            #page-boxes{
-                display: flex;
-            }
-            .page-box{
-                height: 30px;
-                width: 30px;
-                border: 1px solid black;
-                border-radius: 10px;
-            }
-            #btns{
-                margin: 10px;
-                display: flex;
-            }
+    <style>
+        a {
+            text-decoration: none;
+        }
 
-            .changeBtn{
-                display: flex;
-                justify-content: center;
-            }
-        </style>
+        #page-boxes {
+            display: flex;
+        }
+
+        .page-box {
+            height: 30px;
+            width: 30px;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+
+        #btns {
+            margin: 10px;
+            display: flex;
+        }
+
+        .changeBtn {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
 </head>
 
 <body>
 
     <div class="container mt-5">
 
-        <div class="input-group mb-3">
-            <input type="text" class="form-control">
-            <button class="btn btn-primary" type="submit">Search</button>
+        <div class="container">
+            <form action="/search" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" name="fname">
+                    <input type="submit" class="btn btn-success">
+                    </button>
+                </div>
+            </form>
         </div>
+
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Sort By
+            </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="/?page=1&orderBy=id">Ascending</a></li>
+                <li><a class="dropdown-item" href="/?page=1&orderBy=First_Name">Descending</a></li>
+            </ul>
+        </div>
+
 
         <table border="1" class="table table-hover ">
             <tr>
-                <th>ID</th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>phone number</th>
-                <th>city</th>
-                <th>email</th>
-                <th>university_id</th>
-                <th>createdAt</th>
+                <th><a class=".link" href="/?page=1&orderBy=id&sort=<%=sort%>&sortField=id">ID</a></th>
+                <th><a class=".link" href="/?page=1&orderBy=First_Name&sort=<%=sort%>">First name</a></th>
+                <th><a class=".link" href="/?page=1&orderBy=Last_Name&sort=<%=sort%>">Last name</a></th>
+                <th><a class=".link" href="/?page=1&orderBy=Contact_No&sort=<%=sort%>">phone number</a></th>
+                <th><a class=".link" href="/?page=1&orderBy=City&sort=<%=sort%>">city</a></th>
+                <th><a class=".link" href="/?page=1&orderBy=Email&sort=<%=sort%>">email</a></th>
+                <th><a class=".link" href="/?page=1&orderBy=University_id&sort=<%=sort%>">university_id</a></th>
+                <th><a class=".link" href="/?page=1&orderBy=createdAt&sort=<%=sort%>">createdAt</a></th>
             </tr>
             <% for(let i=0;i<data.length;i++){ %>
                 <tr>
@@ -63,31 +86,41 @@
         </table>
         <br>
         <br>
-
         <div class="container changeBtn">
-            <a class="btn btn-primary m-1" href="/?page=<%= page %>" role="button">Next &nbsp;&nbsp;<%=page%></a>
+            <a class="btn btn-primary m-1" href="/?page=<%=page%>&orderBy=id&sort=<%=sort%>" role="button">Next
+                &nbsp;&nbsp;<%=page%></a>
             <a class="btn btn-primary m-1" href="/?page=<%= prev %>" role="button">Prev&nbsp;&nbsp; <%= prev%></a>
             <a class="btn btn-primary disabled m-1" href="#" role="button">Total Pages&nbsp;&nbsp; <%= total_pages%></a>
         </div>
-        
+
         <br>
         <br>
         <br>
         <div class="container changeBtn">
-            
-            <%for(let i= (page>5 ? (page-5) : 1) ;i< (page>5 && page< total_pages ? (page+5) : 10);i++){ %>
-                <a class="btn btn-primary m-1" href="/?page=<%= i %>" role="button">Page-<%=i%></a>
-            <%}%>
+
+            <%for(let i=(page>5 ? (page-5) : 1) ;i< (page>5 && page< total_pages ? (page+5) : 10);i++){ %>
+                        <a <% if( page==i+1 ){%>
+                            style="background-color:green;"
+                            <%} else {%>
+                                style="background-color:rgb(13,110,253)"
+                                <%}%>
+                                    class="btn btn-primary m-1"
+                                    href="/?page=<%=page%>"
+                                            role="button">Page-<%=i%>
+                        </a>
+                        <%}%>
         </div>
 
     </div>
 
-   
-
-
 </body>
+<script>
+    var all = document.querySelectorAll('.link');
+    console.log(all);
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
     crossorigin="anonymous"></script>
+
 
 </html>
