@@ -66,8 +66,9 @@ app.get('/', (req, res) => {
         }else{
             sort='ASC';
         }
-        
+
         res.render("page", { data: result, id: ids, page: page, prev: prev, total_pages: total_records ,order_value:req.query.orderBy,sort:sort});
+        
         
     });
 });
