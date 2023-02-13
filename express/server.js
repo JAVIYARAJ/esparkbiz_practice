@@ -35,9 +35,8 @@ app.get('/', (req, res) => {
     let page = req.query.page ?? 1;
     let limit = 10;
     let value = (page - 1) * limit;
-    let sort=req.query.sort || 'DESC';
-    let sortField=req.query.sortField;
-    console.log(`api call ${sort}`);
+    let sort=req.query.sort ?? 'ASC';
+    let orderBy=req.query.orderBy;
     
     
     conn.query('select count(*) as count from student_express', (err, res, field) => {
@@ -61,14 +60,35 @@ app.get('/', (req, res) => {
             page++;
         }
 
-        if(sort=='ASC' && sortField=='id'){
+        //use for toogle a sort functionality
+        if(sort=='ASC' && orderBy=='id'){
             sort='DESC';
-        }else{
+        }else  if(sort=='ASC' && orderBy=='First_Name'){
+            sort='DESC';
+        }
+        else  if(sort=='ASC' && orderBy=='Last_Name'){
+            sort='DESC';
+        }
+        else  if(sort=='ASC' && orderBy=='Contact_No'){
+            sort='DESC';
+        }
+        else  if(sort=='ASC' && orderBy=='City'){
+            sort='DESC';
+        }
+        else  if(sort=='ASC' && orderBy=='Email'){
+            sort='DESC';
+        }
+        else  if(sort=='ASC' && orderBy=='University_id'){
+            sort='DESC';
+        }
+        else  if(sort=='ASC' && orderBy=='createdAt'){
+            sort='DESC';
+        }
+        else{
             sort='ASC';
         }
 
-        res.render("page", { data: result, id: ids, page: page, prev: prev, total_pages: total_records ,order_value:req.query.orderBy,sort:sort});
-        
+        res.render("page", { data: result, id: ids, page: page, prev: prev, total_pages: (total_records/limit),sort:sort});
         
     });
 });
