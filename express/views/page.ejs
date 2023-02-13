@@ -48,20 +48,28 @@
                     <input type="submit" class="btn btn-success">
                     </button>
                 </div>
+
             </form>
+
         </div>
 
-     
-       <table border="1" class="table table-hover ">
+
+        <table border="1" class="table table-hover ">
             <tr>
                 <th><a class=".link" href="/?page=1&orderBy=id&sort=<%=sort%>&sortField=id">ID</a></th>
-                <th><a class=".link" href="/?page=1&orderBy=First_Name&sort=<%=sort%>&sortField=First_Name">First name</a></th>
-                <th><a class=".link" href="/?page=1&orderBy=Last_Name&sort=<%=sort%>&sortField=Last_Name">Last name</a></th>
-                <th><a class=".link" href="/?page=1&orderBy=Contact_No&sort=<%=sort%>&sortField=Contact_No">phone number</a></th>
+                <th><a class=".link" href="/?page=1&orderBy=First_Name&sort=<%=sort%>&sortField=First_Name">First
+                        name</a></th>
+                <th><a class=".link" href="/?page=1&orderBy=Last_Name&sort=<%=sort%>&sortField=Last_Name">Last name</a>
+                </th>
+                <th><a class=".link" href="/?page=1&orderBy=Contact_No&sort=<%=sort%>&sortField=Contact_No">phone
+                        number</a></th>
                 <th><a class=".link" href="/?page=1&orderBy=City&sort=<%=sort%>&sortField=City">city</a></th>
                 <th><a class=".link" href="/?page=1&orderBy=Email&sort=<%=sort%>&sortField=Email">email</a></th>
-                <th><a class=".link" href="/?page=1&orderBy=University_id&sort=<%=sort%>&sortField=University_id">university_id</a></th>
-                <th><a class=".link" href="/?page=1&orderBy=createdAt&sort=<%=sort%>&sortField=createdAt">createdAt</a></th>
+                <th><a class=".link"
+                        href="/?page=1&orderBy=University_id&sort=<%=sort%>&sortField=University_id">university_id</a>
+                </th>
+                <th><a class=".link" href="/?page=1&orderBy=createdAt&sort=<%=sort%>&sortField=createdAt">createdAt</a>
+                </th>
             </tr>
             <% for(let i=0;i<data.length;i++){ %>
                 <tr>
@@ -76,14 +84,14 @@
         <div class="container changeBtn">
             <a class="btn btn-primary m-1" href="/?page=<%=page%>&orderBy=id&sort=<%=sort%>" role="button">Next
                 &nbsp;&nbsp;<%=page%></a>
-            <a class="btn btn-primary m-1" href="/?page=<%= prev %>" role="button"  
-                <% if(prev == 0){%>
-                    style="visibility:hidden;"
+            <a class="btn btn-primary m-1" href="/?page=<%= prev %>" role="button" <% if(prev==0){%>
+                style="visibility:hidden;"
                 <%}else{ %>
                     style="visiblity:visible"
-                <%}%>
-                
-                >Prev&nbsp;&nbsp; <%= prev%></a>
+                    <%}%>
+
+                        >Prev&nbsp;&nbsp; <%= prev%>
+            </a>
             <a class="btn btn-primary disabled m-1" href="#" role="button">Total Pages&nbsp;&nbsp; <%= total_pages%></a>
         </div>
 
@@ -93,15 +101,14 @@
         <div class="container changeBtn">
 
             <%for(let i=(page>5 ? (page-5) : 1) ;i< (page>5 && page< total_pages ? (page+5) : 10);i++){ %>
-                        <a 
-                        <% if( page==i+1 ){%>
+                        <a <% if( page==i+1 ){%>
                             style="background-color:green;"
-                        <%} else {%>
+                            <%} else {%>
                                 style="background-color:rgb(13,110,253)"
-                        <%}%>
-                                class="btn btn-primary m-1"
-                                href="/?page=<%= i %>"
-                                role="button">Page-<%=i%>
+                                <%}%>
+                                    class="btn btn-primary m-1"
+                                    href="/?page=<%= i %>"
+                                        role="button">Page-<%=i%>
                         </a>
                         <%}%>
         </div>
